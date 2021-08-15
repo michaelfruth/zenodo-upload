@@ -6,6 +6,17 @@
 
 set -e
 
+if [ -z "$1" ]; then
+    echo "Dposition ID not given."
+    exit 1
+fi
+if [ -z "$2" ]; then
+    echo "File not given."
+    exit 1
+fi
+
+ZENODO_TOKEN=$(cat ~/.zenodo)
+
 # strip deposition url prefix if provided; see https://github.com/jhpoelen/zenodo-upload/issues/2#issuecomment-797657717
 DEPOSITION=$( echo $1 | sed 's+^http[s]*://zenodo.org/deposit/++g' )
 FILEPATH="$2"
